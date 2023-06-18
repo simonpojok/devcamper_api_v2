@@ -27,7 +27,7 @@ mongoose.connect('mongodb://localhost:27017/devcamperdb', {
   const importData = async () => {
     try {
         await Bootcamp.create(bootcamps);
-        // await Course.create(courses);
+        await Course.create(courses);
 
         console.log('Data Imported...'.green.inverse);
         process.exit();
