@@ -4,7 +4,7 @@ const asyncHandler = require('../middleware/async');
 const path = require('path');
 
 const Bootcamp = require('../models/Bootcamp');
-const { param } = require('express/lib/request');
+
 // @desc  Get all bootcamps
 // @route GET /api/v1/bootcamps
 // @access Public
@@ -58,6 +58,12 @@ exports.updateBootcamp = asyncHandler(async (req, res, next) => {
 
     if (!bootcamp) {
       return  next(new ErrorResponse(`Bootcamp not found with id of ${req.params.id}`, 404));
+    }
+
+    // Make sure user is bootcamp owner
+
+    if(bootcamp.user.toString() !== req.user.id && req.user.role !== 'admin') {
+      return next(new ErrorResponse(`User ${req.params.id} is not authorize to update the bootcamp`, 401));
     }
     res.status(201).json({ success: true, data: bootcamp });
 });

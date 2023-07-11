@@ -78,7 +78,8 @@ exports.updateCourse = asyncHandler(async (req, res, next) => {
     let course = await Course.findById(req.params.id);
 
     if(!course) {
-        return next(new ErrorResponse(`No course with the id of ${req.params.id}`), 404);
+        return next(new ErrorResponse(`No 
+         with the id of ${req.params.id}`), 404);
     }
 
     course = await Course.findByIdAndUpdate(req.params.id, req.body, {
@@ -113,4 +114,3 @@ exports.deleteCourse = asyncHandler(async (req, res, next) => {
     });
 
 });
-
