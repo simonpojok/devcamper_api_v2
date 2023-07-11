@@ -67,7 +67,7 @@ exports.updateBootcamp = asyncHandler(async (req, res, next) => {
       new: true,
       runValidators: true
     });
-    
+
     res.status(201).json({ success: true, data: bootcamp });
 });
 
@@ -85,6 +85,10 @@ exports.deleteBootcamp = asyncHandler(async (req, res, next) => {
   // Delete associated courses
 
   await bootcamp.model('Course').deleteMany({ bootcamp: bootcampId });
+
+  if(bootcamp.user.toString() !== req.user.id && req.user.role !== 'admin') {
+    return next(new ErrorResponse(`User ${req.params.id} is not authorize to delete the bootcamp`, 401));
+  }
 
   // Delete the bootcamp
   await bootcamp.deleteOne();
@@ -129,6 +133,10 @@ exports.bootcampPhotoUpload = asyncHandler(async (req, res, next) => {
 
 if (!bootcamp) {
   return  next(new ErrorResponse(`Bootcamp not found with id of ${req.params.id}`, 404));
+}
+
+if(bootcamp.user.toString() !== req.user.id && req.user.role !== 'admin') {
+  return next(new ErrorResponse(`User ${req.params.id} is not authorize to update the bootcamp`, 401));
 }
 
 if (!req.files) {
