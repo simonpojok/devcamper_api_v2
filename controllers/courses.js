@@ -124,7 +124,7 @@ exports.deleteCourse = asyncHandler(async (req, res, next) => {
       // Make sure user is course owner
 
       if(course.user.toString() !== req.user.id && req.user.role !== 'admin') {
-        return next(new ErrorResponse(`User ${req.user.id} is not authorize to add the course`, 401));
+        return next(new ErrorResponse(`User ${req.user.id} is not authorize to delete the course`, 401));
       }
 
     course = await Course.findByIdAndDelete(req.params.id)
