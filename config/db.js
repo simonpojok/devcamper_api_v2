@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const connectDB = async () => {
   try {
-    await mongoose.connect('mongodb://localhost:27017/devcamperdb', {
+    await mongoose.connect('mongodb+srv://devcomper:bfVLtdsaWQaVvQTc@devcamperv2.qlzqy.mongodb.net/?retryWrites=true&w=majority&appName=devcamperv2', {
       useNewUrlParser: true,
       useUnifiedTopology: true
     });

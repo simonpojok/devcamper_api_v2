@@ -11,11 +11,11 @@ dotenv.config({ path: './config/config.env' });
 const Bootcamp = require('./models/Bootcamp');
 const Course = require('./models/Course');
 
-mongoose.connect('mongodb://localhost:27017/devcamperdb', {
+mongoose.connect('mongodb+srv://devcomper:bfVLtdsaWQaVvQTc@devcamperv2.qlzqy.mongodb.net/?retryWrites=true&w=majority&appName=devcamperv2', {
         useNewUrlParser: true,
         useUnifiedTopology: true
       });
-      
+
 
   // Read JSON files
   const bootcamps = JSON.parse(fs.readFileSync(`${__dirname}/_data/bootcamps.json`, 'utf-8'));
