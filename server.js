@@ -1,5 +1,6 @@
 const path = require('path');
 const express = require('express');
+const cors = require('cors')
 const dotenv = require('dotenv');
 const morgan = require('morgan');
 const connectDB = require('./config/db');
@@ -23,6 +24,8 @@ const auth = require('./routes/auth');
 
 
 const app = express();
+
+app.use(cors())
 
 // Body parser
 
